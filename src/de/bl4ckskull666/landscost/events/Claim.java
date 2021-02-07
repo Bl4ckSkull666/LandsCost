@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.bl4ckskull666.landscost.events;
 
 import de.bl4ckskull666.landscost.LCost;
@@ -10,9 +5,7 @@ import de.bl4ckskull666.landscost.classes.ItemCost;
 import de.bl4ckskull666.landscost.classes.LanguageManager;
 import de.bl4ckskull666.landscost.utils.Inventories;
 import java.util.HashMap;
-import me.angeschossen.lands.Lands;
 import me.angeschossen.lands.api.events.ChunkPreClaimEvent;
-import me.angeschossen.lands.api.land.Land;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
