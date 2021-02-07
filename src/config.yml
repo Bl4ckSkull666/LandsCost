@@ -1,0 +1,10 @@
+default-language: 'en-GB'
+cost:
+    create:
+        material: emerald
+        amount: 1
+        multipli: 1
+    claim:
+        material: iron_ingot
+        amount: 5
+        multipli: 0.25

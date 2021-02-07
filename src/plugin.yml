@@ -1,0 +1,13 @@
+name: LandsCost
+version: 0.1
+api-version: 1.14
+author: Bl4ckSkull666
+main: de.bl4ckskull666.landscost.LCost
+website: http://www.Craft-my-Life.de
+prefix: LCost
+depend: [Lands]
+commands:
+  languagemanager:
+    description: 'Reloads the language files.'
+    usage: /<command>
+    permission: languagemanager.admin

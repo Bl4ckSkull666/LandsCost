@@ -1,0 +1,6 @@
+claim:
+    no-item: '&cYou need &e%item% &cx &e%amount% &cfor the claim.'
+    paid-item: '&aYou paid &e%amount% %item% &afor the claim of new land.'
+create:
+    no-item: '&cYou need &e%item% &cx &e%amount% %cfor a Land creation.'
+    paid-item: '&aYou paid &e%amount% %item% &afor the Land creation.'
