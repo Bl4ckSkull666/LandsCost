@@ -33,6 +33,7 @@ public class Claim implements Listener {
         HashMap<String, String> sr = new HashMap<>();
         sr.put("%claim%", String.valueOf(e.getLandPlayer().getEditLand().getSize()+1));
         sr.put("%item%", cost.getMaterial().name());
+        sr.put("%itemname%", LanguageManager.getTextMessage(e.getLandPlayer().getPlayer().getLocale(), "item." + cost.getMaterial().name().toLowerCase(), cost.getMaterial().name().toLowerCase().replaceAll("_", " "), null));
         sr.put("%amount%", String.valueOf(amount));
         
         if(!Inventories.canPay(e.getLandPlayer().getPlayer(), cost.getMaterial(), amount)) {
