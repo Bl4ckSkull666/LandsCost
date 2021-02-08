@@ -7,4 +7,4 @@ Its use the language of the user, is that not translated, it use the default-lan
 
 
 Example for Player locale, changed from German to English ( United Kingdom ):
-![Locale by Player](https://github.com/Bl4ckSkull666/LandsCost/blob/master/src/screens/client_locale.png?raw=true)
+![Locale by Player](https://github.com/Bl4ckSkull666/LandsCost/blob/master/screens/client_locale.png?raw=true)
