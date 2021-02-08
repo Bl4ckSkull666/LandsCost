@@ -17,7 +17,9 @@ import org.bukkit.event.Listener;
 public class Create implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void doLandCreate(LandCreateEvent e) {
-        LCost.getPlugin().getLogger().severe("do create by " + e.getLandPlayer().getPlayer().getDisplayName());
+        if(LCost.getPlugin().getConfig().getBoolean("debug", false))
+            LCost.getPlugin().getLogger().severe("do create by " + e.getLandPlayer().getPlayer().getDisplayName());
+        
         ItemCost cost = LCost.getCostCreate();
         if(cost.getMaterial() == null)
             return;
@@ -29,16 +31,17 @@ public class Create implements Listener {
         
         int amount = (int)Math.ceil(cost.getAmount()*multipli);
         HashMap<String, String> sr = new HashMap<>();
+        sr.put("%land%", String.valueOf(e.getLandPlayer().getLands().size()+1));
         sr.put("%item%", cost.getMaterial().name());
         sr.put("%amount%", String.valueOf(amount));
         
         if(!Inventories.canPay(e.getLandPlayer().getPlayer(), cost.getMaterial(), amount)) {
-            LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "create.no-item", "You need %item% x %amount% for a Land creation.", sr);
+            LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "create.no-item", "You need %item% x %amount% for the creation of Land number %land%.", sr);
             e.setCancelled(true);
             return;
         }
         
         Inventories.payIt(e.getLandPlayer().getPlayer(), cost.getMaterial(), amount);
-        LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "create.paid-item", "You paid %amount% of %item% for the Land creation.", sr);
+        LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "create.paid-item", "You paid %amount% of %item% for the %land%. Land creation.", sr);
     }
 }

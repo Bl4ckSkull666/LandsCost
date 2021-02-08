@@ -17,7 +17,9 @@ import org.bukkit.event.Listener;
 public class Claim implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void doChunkPreClaim(ChunkPreClaimEvent e) {
-        LCost.getPlugin().getLogger().severe("do claim by " + e.getLandPlayer().getPlayer().getDisplayName());
+        if(LCost.getPlugin().getConfig().getBoolean("debug", false))
+            LCost.getPlugin().getLogger().severe("do claim by " + e.getLandPlayer().getPlayer().getDisplayName());
+        
         ItemCost cost = LCost.getCostClaim();
         if(cost.getMaterial() == null)
             return;
@@ -29,16 +31,17 @@ public class Claim implements Listener {
         
         int amount = (int)Math.ceil(cost.getAmount()*multipli);
         HashMap<String, String> sr = new HashMap<>();
+        sr.put("%claim%", String.valueOf(e.getLandPlayer().getEditLand().getSize()+1));
         sr.put("%item%", cost.getMaterial().name());
         sr.put("%amount%", String.valueOf(amount));
         
         if(!Inventories.canPay(e.getLandPlayer().getPlayer(), cost.getMaterial(), amount)) {
-            LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "claim.no-item", "You need %item% x %amount% for the claim.", sr);
+            LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "claim.no-item", "You need %item% x %amount% for the %claim%. claim.", sr);
             e.setCancelled(true);
             return;
         }
         
         Inventories.payIt(e.getLandPlayer().getPlayer(), cost.getMaterial(), amount);
-        LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "claim.paid-item", "You paid %amount% of %item% for the claim of new land.", sr);
+        LanguageManager.sendMessage(e.getLandPlayer().getPlayer(), "claim.paid-item", "You paid %amount% of %item% for the %claim%. claim of new land.", sr);
     }
 }

@@ -25,7 +25,7 @@ public class Inventories {
     private static void pay(Player p, Material mat, int a) {
         int paid = 0;
         for(ItemStack item: p.getInventory().getContents()) {
-            if(item.getType().equals(mat)) {
+            if(item != null && item.getType().equals(mat)) {
                 if(item.getAmount() > (a-paid)) {
                     item.setAmount(item.getAmount()-(a-paid));
                     paid = a;
