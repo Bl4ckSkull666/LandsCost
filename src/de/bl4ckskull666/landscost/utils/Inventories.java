@@ -18,27 +18,31 @@ public class Inventories {
             return false;
         }
         
-        pay(p, mat, a);
-        return true;
+        return pay(p, mat, a);
     }
     
-    private static void pay(Player p, Material mat, int a) {
-        int paid = 0;
+    private static boolean pay(Player p, Material mat, int a) {
+        int cost = a;
+        
         for(ItemStack item: p.getInventory().getContents()) {
             if(item != null && item.getType().equals(mat)) {
-                if(item.getAmount() > (a-paid)) {
-                    item.setAmount(item.getAmount()-(a-paid));
-                    paid = a;
-                } else if(item.getAmount() <= (a+paid)) {
-                    paid += item.getAmount();
-                    p.getInventory().remove(item);
+                if(item.getAmount() > a) {
+                    item.setAmount(item.getAmount()-a);
+                    a = 0;
+                } else if(item.getAmount() == a || item.getAmount() <= a) {
+                    a -= item.getAmount();
+                    item.setAmount(0);
                 }
             }
             
-            if(paid == a)
-                break;
+            if(a == 0) {
+                p.updateInventory();
+                return true;
+            }
         }
         
+        p.getInventory().addItem(new ItemStack(mat, (cost-a)));
         p.updateInventory();
+        return false;
     }
 }
